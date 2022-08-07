@@ -11,12 +11,9 @@ export class LOC {
   private recurseDirectory(source: string): DirectoryRecurser {
     for (const dir of readdirSync(source, { withFileTypes: true })) {
       if (dir.isDirectory()) {
-        const file = this.recurseDirectory(path.resolve(source, dir.name));
-        if (typeof file === 'string') {
-          this.files.push(file);
-        }
+        this.recurseDirectory(path.resolve(source, dir.name));
       } else {
-        return path.resolve(source, dir.name);
+        this.files.push(path.resolve(source, dir.name));
       }
     }
   }
