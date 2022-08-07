@@ -1,0 +1,17 @@
+{
+  "name": "loc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": "build/index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "npm run build && node build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.6.4"
+  }
+}
