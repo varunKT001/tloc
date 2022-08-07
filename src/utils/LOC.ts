@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync } from 'fs';
+import { readdirSync, readFileSync, existsSync, statSync } from 'fs';
 import { DirectoryRecurser } from '../types';
 import path from 'path';
 
@@ -36,8 +36,20 @@ export class LOC {
   }
 
   public readDirectory() {
-    this.recurseDirectory(this.source);
-    this.calculateLines();
+    if (!existsSync(this.source)) {
+      console.error(`Error: No such file or directory: ${this.source}`);
+      return;
+    }
+
+    const stat = statSync(this.source);
+
+    if (stat.isFile()) {
+      this.result = this.readNumberOfLinesInFile(this.source);
+    } else if (stat.isDirectory()) {
+      this.recurseDirectory(this.source);
+      this.calculateLines();
+    }
+
     return this.result;
   }
 }
