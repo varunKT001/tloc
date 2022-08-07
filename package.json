@@ -6,8 +6,7 @@
   "bin": "build/index.js",
   "scripts": {
     "build": "tsc",
-    "test": "npm run build && node build",
-    "publish": "npm run build && npm publish"
+    "test": "npm run build && node build"
   },
   "keywords": [],
   "author": "",
