@@ -1,7 +1,7 @@
 # 📜 TLOC (Tomper Lines Of Code)
 
 <p align='center'>
-<img src='./assets/banner.png'>
+<img src='https://user-images.githubusercontent.com/83509023/183300434-cf7dcbe1-a44d-42e8-8ae1-0c35b5ecad3c.png'>
 </p>
 
 Find out how many lines of code you have written for your project.
