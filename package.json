@@ -8,8 +8,26 @@
     "build": "tsc",
     "test": "npm run build && node lib"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "typescript",
+    "cli"
+  ],
+  "author": {
+    "name": "Varun Kumar Tiwari",
+    "email": "tiwarivarun819.vt33.vt@gmail.com",
+    "url": "https://varuntiwari.xyz"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/varunKT001/tloc.git"
+  },
+  "bugs": {
+    "url": "https://github.com/varunKT001/tloc.git/issues"
+  },
+  "homepage": "https://github.com/varunKT001/tloc.git#readme",
+  "directories": {
+    "lib": "lib"
+  },
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^18.6.4"
