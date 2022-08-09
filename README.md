@@ -70,7 +70,7 @@ tloc ./src -l -- dummyData.js ./temp
 ## 🛠 Local Installation and setup
 
 1. Clone the repo to your local machine.
-2. Install the required dependency using :
+2. Install the required dependency using:
 
    ```javascript
    npm install
@@ -78,7 +78,7 @@ tloc ./src -l -- dummyData.js ./temp
 
 ## 🏎 Creating production built
 
-1. Build the package using
+1. Build the package using:
 
    ```javascript
    npm run build
