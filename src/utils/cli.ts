@@ -10,7 +10,7 @@ interface InitInfo {
   log: boolean;
 }
 
-export function cli(args: ParsedArgs) {
+export function cli(args: ParsedArgs): void {
   const pathName = args['_'][0];
   const ignore = args['--'] || [];
   const log = args['l'] || args['log'] || false;
@@ -31,7 +31,7 @@ export function cli(args: ParsedArgs) {
   init(info);
 }
 
-function init(info: InitInfo) {
+function init(info: InitInfo): void {
   const { pathName, ignoreScopedDirents, ignoreUnscopedDirents, log } = info;
 
   const reader = new LOC(
@@ -49,19 +49,31 @@ function init(info: InitInfo) {
 
     if (log) {
       if (reader.allFiles.length) {
-        console.group(chalk.yellowBright.bold('ALL FILES'));
+        const length = reader.allFiles.length;
+
+        console.group(
+          `${chalk.yellowBright.bold('DETECTED FILES')} (${length})`
+        );
         for (let file of reader.allFiles) console.log(file);
         console.groupEnd();
       }
 
       if (reader.consideredFiles.length) {
-        console.group(chalk.yellowBright.bold('CONSIDERED FILES'));
+        const length = reader.consideredFiles.length;
+
+        console.group(
+          `${chalk.yellowBright.bold('CONSIDERED FILES')} (${length})`
+        );
         for (let file of reader.consideredFiles) console.log(chalk.green(file));
         console.groupEnd();
       }
 
       if (reader.ignoredFiles.length) {
-        console.group(chalk.yellowBright.bold('IGNORED FILES'));
+        const length = reader.ignoredFiles.length;
+
+        console.group(
+          `${chalk.yellowBright.bold('IGNORED FILES')} (${length})`
+        );
         for (let file of reader.ignoredFiles) console.log(chalk.red(file));
         console.groupEnd();
       }

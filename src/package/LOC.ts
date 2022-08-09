@@ -24,6 +24,11 @@ export class LOC {
 
       if (this.ignoreScopedDirents.includes(arr[0])) {
         this.ignoredFiles.push(nextPath);
+
+        this.allFiles[this.allFiles.length - 1] = `${
+          this.allFiles[this.allFiles.length - 1]
+        } ${chalk.red('(sub-tree ignored)')}`;
+
         continue;
       }
 
@@ -38,6 +43,11 @@ export class LOC {
 
       if (skip) {
         this.ignoredFiles.push(nextPath);
+
+        this.allFiles[this.allFiles.length - 1] = `${
+          this.allFiles[this.allFiles.length - 1]
+        } ${chalk.red('(sub-tree ignored)')}`;
+
         continue;
       }
 
