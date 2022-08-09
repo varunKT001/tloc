@@ -16,9 +16,13 @@ npm install -g tloc
 
 ## 🧪 Usage
 
-The `tloc` command can be used to calculate the number of lines of code by providing the location of the file or folder.
+The `tloc` command can be used to calculate the number of lines of code by providing the location of the file or folder. Some additional options and flags that can be used:
 
-#### Example
+1. `-l` or `--log`: Adding some additional information to the console.
+
+2. `--`: Ignoring files/directories (_This option must be used at the last_)
+
+#### Example: Getting number of lines
 
 ```
 # path to folder
@@ -28,14 +32,40 @@ tloc ./src
 tloc ./src/index.ts
 ```
 
+#### Example: Logging additional information
+
+```
+tloc ./src -l
+
+# or
+
+tloc ./src --log
+```
+
+#### Example: Ignoring files/directories
+
+```
+# Remove particular file or directory
+tloc ./src -- ./src/dummyData.js ./temp
+
+# Remove all matching occurences
+tloc ./src -- dummyData.js temp
+
+# While using other options, use the ignore option at last
+tloc ./src -l -- dummyData.js ./temp
+```
+
 ## ✨ Features
 
 - [x] Calculates the number of lines in each file by recursively moving through the directories.
+- [x] Ignore specific files/directories or all matching occurrences.
 - [x] Implemented using `Depth First Search (DFS)` algorithm.
 
 ## ⚙ Tools and Technologies used
 
 1. [Typescript](https://www.typescriptlang.org/)
+1. [Minimist](https://www.npmjs.com/package/minimist)
+1. [Chalk](https://www.npmjs.com/package/chalk)
 
 ## 🛠 Local Installation and setup
 
