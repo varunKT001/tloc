@@ -70,7 +70,7 @@ tloc ./src -l -- dummyData.js ./temp
 ## 🛠 Local Installation and setup
 
 1. Clone the repo to your local machine.
-2. Install the required dependency for server using :
+2. Install the required dependency using :
 
    ```javascript
    npm install
