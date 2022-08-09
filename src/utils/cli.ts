@@ -13,7 +13,7 @@ interface InitInfo {
 export function cli(args: ParsedArgs): void {
   const pathName = args['_'][0];
   const ignore = args['--'] || [];
-  const log = args['l'] || args['log'] || false;
+  const log = args['l'] || args['log'] ? true : false;
 
   const ignoreScopedDirents = ignore
     .filter((p) => p.includes('/'))
@@ -43,16 +43,12 @@ function init(info: InitInfo): void {
   const numberOfLines = reader.readDirectory();
 
   if (numberOfLines) {
-    console.log(
-      `${chalk.bold('LINES OF CODE')}: ${chalk.bold.green(numberOfLines)}`
-    );
-
     if (log) {
       if (reader.allFiles.length) {
         const length = reader.allFiles.length;
 
         console.group(
-          `${chalk.yellowBright.bold('DETECTED FILES')} (${length})`
+          `${chalk.yellowBright.bold('DETECTED FILES/DIRECTORIES')} (${length})`
         );
         for (let file of reader.allFiles) console.log(file);
         console.groupEnd();
@@ -77,6 +73,12 @@ function init(info: InitInfo): void {
         for (let file of reader.ignoredFiles) console.log(chalk.red(file));
         console.groupEnd();
       }
+
+      console.log('\n');
     }
+
+    console.log(
+      `${chalk.bold('LINES OF CODE')}: ${chalk.bold.green(numberOfLines)}`
+    );
   }
 }
