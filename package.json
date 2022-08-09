@@ -1,6 +1,6 @@
 {
   "name": "tloc",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "",
   "main": "index.js",
   "bin": "lib/index.js",
@@ -37,6 +37,7 @@
     "lib/**/*"
   ],
   "dependencies": {
+    "chalk": "^4.1.2",
     "minimist": "^1.2.6"
   }
 }

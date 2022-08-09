@@ -1,33 +1,34 @@
-import {
-  readdirSync,
-  readFileSync,
-  existsSync,
-  statSync,
-  realpathSync,
-} from 'fs';
-import { DirectoryRecurser } from '../types';
+import chalk from 'chalk';
+import { readdirSync, readFileSync, existsSync, statSync } from 'fs';
 import path from 'path';
 
 export class LOC {
-  public files: string[] = [];
+  public allFiles: string[] = [];
+  public consideredFiles: string[] = [];
+  public ignoredFiles: string[] = [];
   public result: number = 0;
 
   constructor(
     public source: string,
-    public ignoreScoped: string[],
-    public ignoreUnscoped: string[]
+    public ignoreScopedDirents: string[],
+    public ignoreUnscopedDirents: string[]
   ) {}
 
-  private recurseDirectory(source: string): DirectoryRecurser {
+  private recurseDirectory(source: string): void {
     for (const dir of readdirSync(source, { withFileTypes: true })) {
       const nextPath = path.resolve(source, dir.name);
 
+      this.allFiles.push(nextPath);
+
       const arr = [nextPath];
 
-      if (this.ignoreScoped.includes(arr[0])) continue;
+      if (this.ignoreScopedDirents.includes(arr[0])) {
+        this.ignoredFiles.push(nextPath);
+        continue;
+      }
 
       let skip = false;
-      this.ignoreUnscoped.forEach((p) => {
+      this.ignoreUnscopedDirents.forEach((p) => {
         if (process.platform === 'win32') {
           if (nextPath.split('\\').includes(p)) skip = true;
         } else {
@@ -35,12 +36,15 @@ export class LOC {
         }
       });
 
-      if (skip) continue;
+      if (skip) {
+        this.ignoredFiles.push(nextPath);
+        continue;
+      }
 
       if (dir.isDirectory()) {
         this.recurseDirectory(nextPath);
       } else {
-        this.files.push(nextPath);
+        this.consideredFiles.push(nextPath);
       }
     }
   }
@@ -54,7 +58,7 @@ export class LOC {
   private calculateLines(): void {
     let numberOfLines = 0;
 
-    for (const filePath of this.files) {
+    for (const filePath of this.consideredFiles) {
       const numberOfLinesInFile = this.readNumberOfLinesInFile(filePath);
       numberOfLines += numberOfLinesInFile;
     }
@@ -64,7 +68,10 @@ export class LOC {
 
   public readDirectory() {
     if (!existsSync(this.source)) {
-      console.error(`Error: No such file or directory: ${this.source}`);
+      console.log(
+        `${chalk.red.bold('Error')}: No such file or directory: ${this.source}`
+      );
+
       return;
     }
 

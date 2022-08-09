@@ -1,1 +1,1 @@
-export * from './LOC';
+export * from './cli';
