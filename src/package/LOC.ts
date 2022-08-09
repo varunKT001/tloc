@@ -20,9 +20,7 @@ export class LOC {
 
       this.allFiles.push(nextPath);
 
-      const arr = [nextPath];
-
-      if (this.ignoreScopedDirents.includes(arr[0])) {
+      if (this.ignoreScopedDirents.includes(nextPath)) {
         this.ignoredFiles.push(nextPath);
 
         this.allFiles[this.allFiles.length - 1] = `${
